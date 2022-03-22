@@ -36,13 +36,18 @@ It will be accessible at http://localhost, and at http://localhost/phpmyadmin yo
 
 Run the following command from the root of the project folder.
 
-`docker run -it -p 80:80 -p 3306:3306 -v ${PWD}/app:/app --name docker-lamp otapliger/lamp`
+`docker run -it -p 80:80 -p 3306:3306 --name docker-lamp \
+-v ${PWD}/app:/app \
+otapliger/lamp`
 
 The subfolder `app` should contain the root of your PHP application.
 
 If you wish to mount a MySQL folder locally, so that MySQL files are saved on your machine, run the following command instead:
 
-`docker run -it -p 80:80 -p 3306:3306 -v ${PWD}/mysql:/var/lib/mysql -v ${PWD}/app:/app --name docker-lamp otapliger/lamp`
+`docker run -it -p 80:80 -p 3306:3306 --name docker-lamp \
+-v ${PWD}/mysql:/var/lib/mysql \
+-v ${PWD}/app:/app \
+otapliger/lamp`
 
 The MySQL database will thus become persistent at each subsequent run of your image.
 
@@ -79,6 +84,9 @@ The optional user is called `user`, and has `passw0rd` as password. It has full 
 
 Set these variables using the `-e` flag when invoking `docker`:
 
-`docker run -it -p 80:80 -p 3306:3306 -v ${PWD}/app:/app -e MYSQL_ADMIN_PASS="passw0rd" --name docker-lamp otapliger/lamp`
+`docker run -it -p 80:80 -p 3306:3306 --name docker-lamp \
+-v ${PWD}/app:/app \
+-e MYSQL_ADMIN_PASS="passw0rd" \
+otapliger/lamp`
 
 Please note that the MySQL variables will not work if an existing MySQL volume is supplied.
